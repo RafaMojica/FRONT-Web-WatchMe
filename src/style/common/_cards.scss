@@ -1,0 +1,75 @@
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  align-items: center;
+  gap: 2.5rem;
+  padding: 0 4%;
+}
+
+.img-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+  img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+    transition: transform 0.5s;
+  }
+  &:hover img {
+    transform: scale(1.1);
+  }
+  &:hover .description-card {
+    height: 100%;
+  }
+}
+
+.description-card {
+  width: 100%;
+  height: 0;
+  background: linear-gradient(rgb(0, 0, 0, 0.1), $hover);
+  position: absolute;
+  border-radius: 8px;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 40px;
+  transition: height 0.5s;
+  flex-direction: column;
+  h5 {
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+  button {
+    margin: 10% 0 0 0;
+    padding: 0 20px;
+    height: 40px;
+    font-size: 80%;
+    color: $letter;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    background-size: 120% auto;
+    background-image: $button-box;
+    &:hover {
+      color: $button_hover-box;
+      background-position: right center;
+    }
+  }
+}
+
+.favorite-card {
+  svg{
+    font-size: 20px;
+  }
+  &:hover svg {
+    color: red;
+  }
+}
