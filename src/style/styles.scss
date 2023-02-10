@@ -1,0 +1,16 @@
+// GLOBAL
+@import "./base/global";
+
+// COMPONENTES
+@import "./components/app";
+@import "./components/navbar";
+@import "./components/home";
+@import "./components/login";
+@import "./components/register";
+@import "./components/description";
+
+// COMMON
+@import "./common/itemSlider";
+@import "./common/searchBar";
+@import "./common/cards";
+@import "./common/genres";
