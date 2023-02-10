@@ -1,0 +1,106 @@
+.navbar-container {
+  position: relative;
+  width: 100%;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  padding: 30px 4% 0px;
+  transition: all 0.5s ease;
+}
+
+.navbar-logo {
+  img {
+    height: 8rem;
+  }
+}
+
+.navbar-menu {
+  ul {
+    display: flex;
+    list-style: none;
+  }
+  a {
+    color: $letter;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 5px 0;
+    margin: 0px 40px;
+    transition: all 0.5s ease;
+
+    &:hover {
+      color: $hover;
+    }
+    &.active {
+      color: $hover;
+    }
+  }
+}
+
+.navbar-login {
+  display: flex;
+  align-items: center;
+  a {
+    color: $letter;
+    text-decoration: none;
+    padding: 5px 0;
+    margin-left: 10px;
+    margin-right: 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: all 0.5s ease;
+
+    &:hover {
+      color: $hover;
+    }
+  }
+  .icon {
+    font-size: 35px;
+    cursor: pointer;
+    z-index: 102;
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .navbar-login {
+    .appear {
+      display: block;
+    }
+  }
+  .navbar-menu {
+    display: none;
+    ul {
+      position: absolute;
+      top: 75%;
+      right: 4%;
+      width: 260px;
+      height: 10rem;
+      background: $hover;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      border-radius: 20px;
+      a {
+        display: block;
+        margin: 14px 0;
+        padding: 0px 25px;
+        transition: all .5s ease;
+        &:hover {
+          color: $letter-secundari;
+          transform: translateY(3px);
+        }
+        &.active {
+          color: $letter-secundari;
+        }
+      }
+    }
+    &.open{
+      display: block;
+    }
+  }
+}

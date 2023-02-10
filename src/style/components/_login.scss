@@ -1,0 +1,99 @@
+.login-container {
+  height: 40rem;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-box {
+  position: relative;
+  width: 450px;
+  background: $background_box;
+  padding: 5rem 3rem;
+  border-radius: 8px;
+  color: $letter-box;
+  box-shadow: $box_shadow_box;
+  h2 {
+    font-size: 2rem;
+  }
+  p {
+    font-size: 1.8rem;
+    margin: 2rem 0;
+  }
+  button {
+    margin-bottom: 25px;
+    width: 40%;
+    height: 40px;
+    font-size: 90%;
+    color: $button_letter-box;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid grey;
+    background-size: 120% auto;
+    background-image: $button-box;
+    &:hover{
+      color: $button_hover-box;
+      background-position: right center;
+    }
+  }
+}
+
+.field-login {
+  margin: 25px 0;
+  position: relative;
+  height: 50px;
+  width: 100%;
+  input {
+    height: 100%;
+    width: 100%;
+    border: 1px solid silver;
+    border-radius: 10px;
+    padding-left: 15px;
+    outline: none;
+    font-size: 17px;
+    &:focus {
+      border: 1.5px solid black;
+    }
+    &:focus ~ label, &:valid ~ label {
+      transform: translateY(-180%);
+      transition: 0.4s;
+      background: linear-gradient(
+        180deg,
+        rgb(238, 233, 223) 10%,
+        rgb(255, 255, 255) 50%);
+      font-size: 16px;
+      color: black;
+    }
+    &:valid ~ .show{
+      visibility: visible;
+    }
+  }
+  label, .show {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  label{
+    left: 15px;
+    pointer-events: none;
+    color: grey;
+    font-size: 17px;
+  }
+  .show{
+    right: 20px;
+    font-weight: bold;
+    font-size: .9rem;
+    cursor: pointer;
+    user-select: none;
+    visibility: hidden;
+  }
+}
+
+.forget-login{
+  a{
+    color: blue;
+  }
+}
