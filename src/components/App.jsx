@@ -1,26 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Route, Routes } from "react-router";
 import Home from "./Home";
 import Movies from "./Movies";
 import Series from "./Series";
 import Login from "./Login";
 import Register from "./Register";
-import { useDispatch } from "react-redux";
-import { popularMovies, topMovies } from "../states/movies";
-import { popularSeries, topSeries } from "../states/series";
 import Description from "./Description";
 
-
 function App() {
-  const dispatch = useDispatch()
-
-  useEffect(()=>{
-    dispatch(popularMovies())
-    dispatch(popularSeries())
-    dispatch(topMovies())
-    dispatch(topSeries())
-  }, [dispatch])
-
   return (
     <>
       <Routes>

@@ -1,13 +1,25 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ItemSlider from "../common/ItemSlider";
+import Carrusel from "../common/Carrusel";
+import { popularMovies, topMovies } from "../states/movies";
+import { popularSeries, topSeries } from "../states/series";
+
 import Navbar from "./Navbar";
 
 function Home() {
+  const dispatch = useDispatch();
   const moviesPopular = useSelector((state) => state.movies.popular);
   const seriesPopular = useSelector((state) => state.series.popular);
   const topRatedMovie = useSelector((state) => state.movies.topRated);
   const topRatedSerie = useSelector((state) => state.series.topRated);
+
+  useEffect(() => {
+    dispatch(popularMovies());
+    dispatch(popularSeries());
+    dispatch(topMovies());
+    dispatch(topSeries());
+  }, [dispatch]);
 
   return (
     <>
@@ -20,6 +32,9 @@ function Home() {
           <ItemSlider data={seriesPopular} index={1} />
         </div>
       </div>
+      <Carrusel posters={topRatedMovie} type={"PELICULAS"} />
+      <Carrusel posters={topRatedSerie} type={"SERIES"} />
+
     </>
   );
 }

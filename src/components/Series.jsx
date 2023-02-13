@@ -3,31 +3,41 @@ import { useDispatch, useSelector } from "react-redux";
 import Cards from "../common/Cards";
 import Genres from "../common/Genres";
 import SearchBar from "../common/SearchBar";
-import { genreSeries } from "../states/series";
+import { genreSeries, popularSeries } from "../states/series";
 import Navbar from "./Navbar";
 
 function Series() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const seriesPopular = useSelector((state) => state.series.popular);
-  const genre = useSelector((state) => state.series.genre);
-  const type = "serie"
+  const genresSeries = useSelector((state) => state.series.genre);
+  const type = "serie";
 
-  useEffect(()=>{
-    dispatch(genreSeries())
-  }, [dispatch])
+  useEffect(() => {
+    dispatch(genreSeries());
+    dispatch(popularSeries());
+  }, [dispatch]);
 
   return (
     <>
-    <Navbar />
-    <div className="serie-container">
-      <SearchBar type={type} />
-      <Genres genre={genre} />
-      <div className="cards-container">
-        {seriesPopular.map((serie) => (
-          <Cards key={serie.id} movie={serie} />
-        ))}
+      <Navbar />
+      <div className="serie-container">
+        <SearchBar type={type} />
+        <div className="conteiner-genres">
+          <button className="btn-genre">All</button>
+          {genresSeries.map((genre) => (
+            <Genres key={genre.id} genre={genre} />
+          ))}
+        </div>
+        <div className="cards-container">
+          {seriesPopular.map((serie) => (
+            <Cards key={serie.id} movie={serie} />
+          ))}
+        </div>
+        <div className="btn-container">
+          <button className="btn-genre">Atras</button>
+          <button className="btn-genre">Siguiente</button>
+        </div>
       </div>
-    </div>
     </>
   );
 }
