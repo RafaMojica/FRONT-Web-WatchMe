@@ -1,3 +1,34 @@
-.conteiner-genres{
-    margin: 0px 4% 40px;
+.conteiner-genres {
+  margin: 0px 4% 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.btn-genre {
+  width: 120px;
+  height: 40px;
+  font-size: 90%;
+  color: $letter;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  background-size: 120% auto;
+  background-image: $button-box;
+  &:hover {
+    color: $button_hover-box;
+    background-position: right center;
+  }
+}
+
+.btn-container{
+  margin: 5% auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  .btn-genre {
+    margin: 0 20px;
+  }
 }

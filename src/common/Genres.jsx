@@ -1,14 +1,11 @@
-import React from 'react'
+import React from "react";
 
-function Genres({genre}) {
-
-  console.log(genre)
-  
+function Genres({ genre }) {
   return (
-    <div className='conteiner-genres'>
-        <h3>Generos</h3>
-    </div>
-  )
+    <>
+      <button className="btn-genre">{genre?.name}</button>
+    </>
+  );
 }
 
-export default Genres
+export default Genres;
