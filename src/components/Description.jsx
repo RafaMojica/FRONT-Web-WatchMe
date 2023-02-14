@@ -28,7 +28,7 @@ function Description() {
           </div>
           <div className="description">
             <h2>{films?.title || films?.name}</h2>
-            <p>{`Promedio: ${films?.vote_average}`}</p>
+            <p>{`Calificación: ${films?.vote_average}`}</p>
             <p>{films?.overview || "Aun no contamos con su descripcion"}</p>
             <button>Atrás</button>
           </div>
