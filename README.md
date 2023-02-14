@@ -62,6 +62,7 @@ Sitio Web que permite al usuario ver descripciones de películas y series de tel
 |  JavaScript    |
 |  Sass          |
 |  Axios         |
+|  Html          |
 |                |
 
 <p align="right"><a href="#inicio">⬆ Volver al inicio</a></p>
@@ -104,6 +105,7 @@ Actualmente esta aplicacion Frontend esta conectado a un Backend donde es necesa
     REACT_APP_URL_IMG_ORIGINAL="https://image.tmdb.org/t/p/original"
     REACT_APP_URL_IMG_W340="https://image.tmdb.org/t/p/w300"
     REACT_APP_URL_IMG_W342="https://image.tmdb.org/t/p/w342"
+    REACT_APP_URL_IMG_W300="https://image.tmdb.org/t/p/w300"
    ```
 4. Corre el servidor
    ```sh
@@ -137,7 +139,6 @@ Actualmente esta aplicacion Frontend esta conectado a un Backend donde es necesa
 - 🔹 OTRAS
 
   - [x] Persistencia de sesión
-  - [x] Observar pelicula o series de TV similares a la escogida
 
 <p align="right"><a href="#inicio">⬆ Volver al inicio</a></p>
 

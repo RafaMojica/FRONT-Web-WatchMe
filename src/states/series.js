@@ -4,7 +4,6 @@ import axios from "axios";
 const initialState = {
   loading: true,
   popular: [],
-  similar: [],
   select: {},
   search: [],
   genre: [],
@@ -16,15 +15,6 @@ const urlBaseSeries = axios.create({ baseURL: `${process.env.REACT_APP_URL_SERIE
 export const popularSeries = createAsyncThunk("POPULAR_SERIES", async () => {
   try {
     const series = await urlBaseSeries.get("/popular");
-    return series.data.results;
-  } catch (error) {
-    return error;
-  }
-});
-
-export const similarSeries = createAsyncThunk("SIMILAR_SERIES", async (id) => {
-  try {
-    const series = await urlBaseSeries.get(`/similar/${id}`);
     return series.data.results;
   } catch (error) {
     return error;
@@ -76,18 +66,6 @@ const serieReducer = createReducer(initialState, {
     state.popular = action.payload;
   },
   [popularSeries.rejected]: (state) => {
-    state.loading = false;
-  },
-
-
-  [similarSeries.pending]: (state) => {
-    state.loading = true;
-  },
-  [similarSeries.fulfilled]: (state, action) => {
-    state.loading = false;
-    state.similar = action.payload;
-  },
-  [similarSeries.rejected]: (state) => {
     state.loading = false;
   },
 

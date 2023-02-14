@@ -4,7 +4,6 @@ import axios from "axios";
 const initialState = {
   loading: true,
   popular: [],
-  similar: [],
   select: {},
   search: [],
   genre: [],
@@ -16,15 +15,6 @@ const urlBaseMovies = axios.create({ baseURL: `${process.env.REACT_APP_URL_MOVIE
 export const popularMovies = createAsyncThunk("POPULAR_MOVIES", async () => {
   try {
     const movies = await urlBaseMovies.get("/popular");
-    return movies.data.results;
-  } catch (error) {
-    return error;
-  }
-});
-
-export const similarMovies = createAsyncThunk("SIMILAR_MOVIES", async (id) => {
-  try {
-    const movies = await urlBaseMovies.get(`/similar/${id}`);
     return movies.data.results;
   } catch (error) {
     return error;
@@ -76,18 +66,6 @@ const movieReducer = createReducer(initialState, {
     state.popular = action.payload;
   },
   [popularMovies.rejected]: (state) => {
-    state.loading = false;
-  },
-
-
-  [similarMovies.pending]: (state) => {
-    state.loading = true;
-  },
-  [similarMovies.fulfilled]: (state, action) => {
-    state.loading = false;
-    state.similar = action.payload;
-  },
-  [similarMovies.rejected]: (state) => {
     state.loading = false;
   },
 
