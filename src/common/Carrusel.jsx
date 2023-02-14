@@ -1,21 +1,37 @@
 import React from "react";
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
-function Carrusel({ posters, type }) {
+function Carrusel({ posters, type, url }) {
   return (
-    <div className="container-carrusel">
-      <div className="description-carrusel">
+    <div className="container-carousel">
+      <div className="name-carousel">
         <h3>{type} MEJOR PUNTUADAS</h3>
-        <button>Ver mas {type}</button>
+        <Link to={`${url}`}>
+          <button className="btn-carrousel">Ver mas {type}</button>
+        </Link>
       </div>
-      <div className="poster-carrusel">
-        {posters.map((poster) => (
-          <img src={`https://image.tmdb.org/t/p/w300/${poster?.poster_path}`} alt="poster-img" />
-        ))}
+      <div className="list-carousel" id="list-carousel">
+        <button className="change button-pre">
+          <AiOutlineArrowLeft />
+        </button>
+        <div className="track-carousel" id="track">
+          <div className="carrusel">
+            {posters.map((poster) => (
+              <Link to={`${url}/${poster?.id}`}>
+                <img
+                  key={poster?.id}
+                  src={`${process.env.REACT_APP_URL_IMG_W300}/${poster?.poster_path}`}
+                  alt="poster-img"
+                />
+              </Link>
+            ))}
+          </div>
+        </div>
+        <button className="change button-next">
+          <AiOutlineArrowRight />
+        </button>
       </div>
-      <ul className="puntos">
-        <li></li>
-        <li></li>
-      </ul>
     </div>
   );
 }

@@ -4,7 +4,6 @@ import ItemSlider from "../common/ItemSlider";
 import Carrusel from "../common/Carrusel";
 import { popularMovies, topMovies } from "../states/movies";
 import { popularSeries, topSeries } from "../states/series";
-
 import Navbar from "./Navbar";
 
 function Home() {
@@ -29,12 +28,11 @@ function Home() {
           <ItemSlider data={moviesPopular} index={0} />
           <ItemSlider data={seriesPopular} index={0} />
           <ItemSlider data={moviesPopular} index={1} />
-          <ItemSlider data={seriesPopular} index={1} />
+          <ItemSlider data={seriesPopular} index={1} /> 
         </div>
       </div>
-      <Carrusel posters={topRatedMovie} type={"PELICULAS"} />
-      <Carrusel posters={topRatedSerie} type={"SERIES"} />
-
+      <Carrusel posters={topRatedMovie} type={"PELICULAS"} url={"movies"} />
+      <Carrusel posters={topRatedSerie} type={"SERIES"} url={"series"} />
     </>
   );
 }

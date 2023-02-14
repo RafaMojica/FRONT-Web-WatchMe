@@ -1,51 +1,110 @@
-.container-carrusel {
+.container-carousel {
   position: relative;
-  top: 600px;
+  top: 590px;
   width: 100%;
-  padding: 1% 4%;
-  overflow: hidden;
+  padding: 0 4%;
+  margin: 20px 0;
 }
 
-.description-carrusel {
-    display: flex;
-    margin-bottom: 25px;
-    font-size: 1.4rem;
-    align-items: center;
-    button{
-        text-transform: lowercase;
-        margin: 0 25px;
-        cursor: pointer;
-        padding: 8px;
-    }
-}
-
-.poster-carrusel {
-  width: 200%;
+.name-carousel {
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
+  padding: 25px 0;
+  text-align: center;
   align-items: center;
-  gap: 18px;
-  img {
-    width: 100%;
-    height: 350px;
-    border-radius: 5px;
+  h3 {
+    margin-right: 4rem;
+    font-size: 1.7rem;
   }
 }
 
-.puntos {
-  margin: 1.8rem 0 0 0;
-  width: 100%;
+.btn-carrousel {
+  width: 150px;
+  text-transform: lowercase;
+  height: 40px;
+  font-size: 90%;
+  color: $letter;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  background-size: 120% auto;
+  background-image: $button-box;
+  &:hover {
+    color: $button_hover-box;
+    background-position: right center;
+  }
+}
+
+.list-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0px auto;
+  max-width: 180vh;
+  overflow: hidden;
+}
+
+.change {
+  border-radius: 30px;
+  background-size: 120% auto;
+  background-image: $button-main;
+  position: absolute;
+  z-index: 1;
+  height: 48px;
+  width: 48px;
+  text-align: center;
+  border: 0;
+  cursor: pointer;
+  box-shadow: 0px 0px 4px 6px rgba(170, 170, 170, 0.5);
+  &:focus {
+    outline: 0;
+  }
+  svg {
+    font-size: 20px;
+    height: 100%;
+    color: white;
+  }
+  &:hover {
+    color: $buton-hover;
+    background-position: right center;
+    svg{
+      color: black;
+    }
+  }
+}
+
+.button-pre {
+  left: 5px;
+}
+
+.button-next {
+  right: 5px;
+}
+
+.track-carousel {
+  position: relative;
+  top: 0px;
+  left: 0px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  li {
-    border-radius: 50%;
-    width: 1.5rem;
-    height: 1.5rem;
-    margin-left: 1rem;
-    background-color: grey;
+  transition: 0.5s ease-in-out;
+}
+
+.carrusel {
+  position: relative;
+  width: 100%;
+  float: left;
+  display: flex;
+  height: 100%;
+  border-radius: 15px;
+  a {
     text-decoration: none;
-    list-style: none;
+    img {
+      transition: 0.3s ease-in-out;
+      border-radius: 20px;
+      box-shadow: 0px 0px 5px 5px rgba(170, 170, 170, 0.2);
+      margin: 10px;
+    }
   }
 }
