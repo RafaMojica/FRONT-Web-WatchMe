@@ -30,6 +30,8 @@ export const selectSerie = createAsyncThunk("SELECT_SERIE", async (id) => {
   }
 });
 
+export const empySelectSerie = createAsyncThunk("EMPY_SELECT_SERIE", async () => {})
+
 export const searchSeries = createAsyncThunk("SEARCH_SERIES", async (name) => {
   try {
     const series = await urlBaseSeries.get(`/search/${name}`);
@@ -114,6 +116,18 @@ const serieReducer = createReducer(initialState, {
     state.topRated = action.payload;
   },
   [topSeries.rejected]: (state) => {
+    state.loading = false;
+  },
+
+
+  [empySelectSerie.pending]: (state) => {
+    state.loading = true;
+  },
+  [empySelectSerie.fulfilled]: (state, action) => {
+    state.loading = false;
+    state.select = action.payload;
+  },
+  [empySelectSerie.rejected]: (state) => {
     state.loading = false;
   },
 });

@@ -30,6 +30,8 @@ export const selectMovie = createAsyncThunk("SELECT_MOVIE", async (id) => {
   }
 });
 
+export const empySelectMovie = createAsyncThunk("EMPY_SELECT_MOVIE", async () => {})
+
 export const searchMovies = createAsyncThunk("SEARCH_MOVIES", async (name) => {
   try {
     const movies = await urlBaseMovies.get(`/search/${name}`);
@@ -114,6 +116,18 @@ const movieReducer = createReducer(initialState, {
     state.topRated = action.payload;
   },
   [topMovies.rejected]: (state) => {
+    state.loading = false;
+  },
+
+  
+  [empySelectMovie.pending]: (state) => {
+    state.loading = true;
+  },
+  [empySelectMovie.fulfilled]: (state, action) => {
+    state.loading = false;
+    state.select = action.payload;
+  },
+  [empySelectMovie.rejected]: (state) => {
     state.loading = false;
   },
 });
