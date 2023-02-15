@@ -57,6 +57,9 @@
     &:hover {
       color: $hover;
     }
+    &.active {
+      color: $hover;
+    }
   }
   .icon {
     font-size: 35px;
