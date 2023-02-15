@@ -7,7 +7,6 @@ import Login from "./Login";
 import Register from "./Register";
 import Description from "./Description";
 import NotFound from "./NotFound";
-import Loading from "../common/Loading";
 
 function App() {
   return (

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import Loading from "../common/Loading";
 import { empySelectMovie, selectMovie } from "../states/movies";
 import { empySelectSerie, selectSerie } from "../states/series";
 
