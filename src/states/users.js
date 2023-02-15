@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
   loading: true,
-  users: {},
+  user: {},
 };
 
 const urlBaseUsers = axios.create({ baseURL: `${process.env.REACT_APP_URL_USERS}` });
@@ -67,7 +67,7 @@ const usersReducer = createReducer(initialState, {
   },
   [login.fulfilled]: (state, action) => {
     state.loading = false;
-    state.users = action.payload;
+    state.user = action.payload;
   },
   [login.rejected]: (state) => {
     state.loading = false;
@@ -79,7 +79,7 @@ const usersReducer = createReducer(initialState, {
   },
   [persistence.fulfilled]: (state, action) => {
     state.loading = false;
-    state.users = action.payload;
+    state.user = action.payload;
   },
   [persistence.rejected]: (state) => {
     state.loading = false;
