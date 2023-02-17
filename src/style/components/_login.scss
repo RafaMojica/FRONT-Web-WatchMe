@@ -1,5 +1,5 @@
 .login-container {
-  height: 40rem;
+  height: 45rem;
   display: flex;
   text-align: center;
   align-items: center;
@@ -10,7 +10,7 @@
   position: relative;
   width: 450px;
   background: $background_box;
-  padding: 5rem 3rem;
+  padding: 4rem 3rem;
   border-radius: 8px;
   color: $letter-box;
   box-shadow: $box_shadow_box;
@@ -22,6 +22,7 @@
     margin: 2rem 0;
   }
   button {
+    margin-top: 10px;
     margin-bottom: 25px;
     width: 40%;
     height: 40px;
@@ -34,7 +35,7 @@
     border: 1px solid grey;
     background-size: 120% auto;
     background-image: $button-box;
-    &:hover{
+    &:hover {
       color: $button_hover-box;
       background-position: right center;
     }
@@ -42,7 +43,7 @@
 }
 
 .field-login {
-  margin: 25px 0;
+  margin: 35px 0;
   position: relative;
   height: 50px;
   width: 100%;
@@ -57,43 +58,52 @@
     &:focus {
       border: 1.5px solid black;
     }
-    &:focus ~ label, &:valid ~ label {
+    &:focus ~ label,
+    &:valid ~ label {
       transform: translateY(-180%);
       transition: 0.4s;
       background: linear-gradient(
         180deg,
-        rgb(238, 233, 223) 10%,
-        rgb(255, 255, 255) 50%);
+        rgba(253, 253, 253, 0.1) 20%,
+        rgb(255, 255, 255) 50%
+      );
       font-size: 16px;
       color: black;
     }
-    &:valid ~ .show{
+    &:valid ~ .show {
       visibility: visible;
     }
   }
-  label, .show {
+  label,
+  .show {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
   }
-  label{
+  label {
     left: 15px;
     pointer-events: none;
     color: grey;
     font-size: 17px;
   }
-  .show{
+  .show {
     right: 20px;
     font-weight: bold;
-    font-size: .9rem;
+    font-size: 0.9rem;
     cursor: pointer;
     user-select: none;
     visibility: hidden;
   }
 }
 
-.forget-login{
-  a{
+.forget-login {
+  a {
     color: blue;
   }
+}
+
+.erros-login {
+  margin: 4px 0;
+  font-size: 0.8rem;
+  color: red;
 }
