@@ -18,9 +18,8 @@ function Carrusel({ posters, type, url }) {
         <div className="track-carousel" id="track">
           <div className="carrusel">
             {posters.map((poster) => (
-              <Link to={`${url}/${poster?.id}`}>
+              <Link key={poster?.id} to={`${url}/${poster?.id}`}>
                 <img
-                  key={poster?.id}
                   src={`${process.env.REACT_APP_URL_IMG_W300}/${poster?.poster_path}`}
                   alt="poster-img"
                 />
