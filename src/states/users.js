@@ -1,5 +1,6 @@
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import axios from "axios";
+import swal from "sweetalert"
 
 const initialState = {
   loading: true,
@@ -8,15 +9,28 @@ const initialState = {
 
 const urlBaseUsers = axios.create({ baseURL: `${process.env.REACT_APP_URL_USERS}` });
 
-export const register = createAsyncThunk("REGISTER_USER", async (user) => {
+export const registerUser = createAsyncThunk("REGISTER_USER", async (user) => {
   try {
-    await urlBaseUsers.post("/register", user);
+    const registro = await urlBaseUsers.post("/register", user);
+    swal({
+      title: registro.data,
+      text: " ",
+      icon: "success",
+      timer: "3000",
+      button: false
+    })
   } catch (error) {
-    return error;
+    swal({
+      title: error.response.data,
+      text: " ",
+      icon: "error",
+      timer: "3000",
+      button: false
+    })
   }
 });
 
-export const login = createAsyncThunk("LOGIN_USER", async (user) => {
+export const loginUser = createAsyncThunk("LOGIN_USER", async (user) => {
   try {
     const dataUser = await urlBaseUsers.post("/login", user);
     return dataUser.data;
@@ -25,7 +39,7 @@ export const login = createAsyncThunk("LOGIN_USER", async (user) => {
   }
 });
 
-export const persistence = createAsyncThunk("PERSISTENCE_USER", async () => {
+export const persistenceUser = createAsyncThunk("PERSISTENCE_USER", async () => {
   try {
     const user = await urlBaseUsers.get("/me");
     return user.data;
@@ -34,7 +48,7 @@ export const persistence = createAsyncThunk("PERSISTENCE_USER", async () => {
   }
 });
 
-export const logout = createAsyncThunk("LOGOUT_USER", async (name) => {
+export const logoutUser = createAsyncThunk("LOGOUT_USER", async (name) => {
   try {
     await urlBaseUsers.get("/logout");
   } catch (error) {
@@ -51,48 +65,48 @@ export const deleteUser = createAsyncThunk("DELETE_USER", async (email) => {
 });
 
 const usersReducer = createReducer(initialState, {
-  [register.pending]: (state) => {
+  [registerUser.pending]: (state) => {
     state.loading = true;
   },
-  [register.fulfilled]: (state, action) => {
+  [registerUser.fulfilled]: (state, action) => {
     state.loading = false;
   },
-  [register.rejected]: (state) => {
+  [registerUser.rejected]: (state, action) => {
     state.loading = false;
   },
 
 
-  [login.pending]: (state) => {
+  [loginUser.pending]: (state) => {
     state.loading = true;
   },
-  [login.fulfilled]: (state, action) => {
+  [loginUser.fulfilled]: (state, action) => {
     state.loading = false;
     state.user = action.payload;
   },
-  [login.rejected]: (state) => {
+  [loginUser.rejected]: (state) => {
     state.loading = false;
   },
 
 
-  [persistence.pending]: (state) => {
+  [persistenceUser.pending]: (state) => {
     state.loading = true;
   },
-  [persistence.fulfilled]: (state, action) => {
+  [persistenceUser.fulfilled]: (state, action) => {
     state.loading = false;
     state.user = action.payload;
   },
-  [persistence.rejected]: (state) => {
+  [persistenceUser.rejected]: (state) => {
     state.loading = false;
   },
 
 
-  [logout.pending]: (state) => {
+  [logoutUser.pending]: (state) => {
     state.loading = true;
   },
-  [logout.fulfilled]: (state, action) => {
+  [logoutUser.fulfilled]: (state, action) => {
     state.loading = false;
   },
-  [logout.rejected]: (state) => {
+  [logoutUser.rejected]: (state) => {
     state.loading = false;
   },
 
