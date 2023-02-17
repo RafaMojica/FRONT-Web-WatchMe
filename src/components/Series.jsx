@@ -10,7 +10,6 @@ function Series() {
   const dispatch = useDispatch();
   const seriesPopular = useSelector((state) => state.series.popular);
   const genresSeries = useSelector((state) => state.series.genre);
-  const type = "serie";
 
   useEffect(() => {
     dispatch(genreSeries());
@@ -21,7 +20,7 @@ function Series() {
     <>
       <Navbar />
       <div className="serie-container">
-        <SearchBar type={type} />
+        <SearchBar type={"serie"} />
         <div className="conteiner-genres">
           <button className="btn-genre">All</button>
           {genresSeries.map((genre) => (

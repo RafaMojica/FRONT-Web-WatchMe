@@ -10,7 +10,6 @@ function Movies() {
   const dispatch = useDispatch();
   const moviesPopular = useSelector((state) => state.movies.popular);
   const genresMovies = useSelector((state) => state.movies.genre);
-  const type = "película";
 
   useEffect(() => {
     dispatch(genreMovies());
@@ -21,7 +20,7 @@ function Movies() {
     <>
       <Navbar />
       <div className="movie-container">
-        <SearchBar type={type} />
+        <SearchBar type={"película"} />
         <div className="conteiner-genres">
           <button className="btn-genre">All</button>
           {genresMovies.map((genre) => (

@@ -11,18 +11,18 @@ function Description() {
   const serie = useSelector((state) => state.series.select);
   let films = {};
 
-  if (type === "movies") films = movie;
-  if (type === "series") films = serie;
-
   useEffect(() => {
     if (type === "movies") dispatch(selectMovie(id));
     if (type === "series") dispatch(selectSerie(id));
   }, [id, type, dispatch]);
 
+  if (type === "movies") films = movie;
+  if (type === "series") films = serie;
+
   const buttonBack = () => {
     window.history.back();
-    dispatch(empySelectMovie());
-    dispatch(empySelectSerie());
+    if (type === "movies") dispatch(empySelectMovie());
+    if (type === "series") dispatch(empySelectSerie());
   };
 
   return (
