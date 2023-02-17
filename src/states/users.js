@@ -8,34 +8,26 @@ const initialState = {
 };
 
 const urlBaseUsers = axios.create({ baseURL: `${process.env.REACT_APP_URL_USERS}` });
+const alertError = (error) => swal({ title: error.response.data, text: " ", icon: "error", timer: "2500", button: false })
+const alertSuccess = (title) => swal({ title: title, text: " ", icon: "success", timer: "2500", button: false })
+
 
 export const registerUser = createAsyncThunk("REGISTER_USER", async (user) => {
   try {
     const registro = await urlBaseUsers.post("/register", user);
-    swal({
-      title: registro.data,
-      text: " ",
-      icon: "success",
-      timer: "3000",
-      button: false
-    })
+    alertSuccess(registro.data)
   } catch (error) {
-    swal({
-      title: error.response.data,
-      text: " ",
-      icon: "error",
-      timer: "3000",
-      button: false
-    })
+    alertError(error)
   }
 });
 
 export const loginUser = createAsyncThunk("LOGIN_USER", async (user) => {
   try {
     const dataUser = await urlBaseUsers.post("/login", user);
+    alertSuccess(`Bienvenido ${dataUser.data.name}`)
     return dataUser.data;
   } catch (error) {
-    return error;
+    alertError(error)
   }
 });
 
