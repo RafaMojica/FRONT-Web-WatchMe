@@ -3,13 +3,13 @@ import React from "react";
 function Loading() {
   return (
     <div id="contenedor">
-      <div class="contenedor-loader">
-        <div class="loader1"></div>
-        <div class="loader2"></div>
-        <div class="loader3"></div>
-        <div class="loader4"></div>
+      <div className="contenedor-loader">
+        <div className="loader1"></div>
+        <div className="loader2"></div>
+        <div className="loader3"></div>
+        <div className="loader4"></div>
       </div>
-      <div class="cargando">Cargando...</div>
+      <div className="cargando">Cargando...</div>
     </div>
   );
 }

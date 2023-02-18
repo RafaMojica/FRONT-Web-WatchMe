@@ -5,6 +5,7 @@ import Carrusel from "../common/Carrusel";
 import { popularMovies, topMovies } from "../states/movies";
 import { popularSeries, topSeries } from "../states/series";
 import Navbar from "./Navbar";
+import Loading from "../common/Loading";
 
 function Home() {
   const dispatch = useDispatch();
@@ -23,16 +24,22 @@ function Home() {
   return (
     <>
       <Navbar />
-      <div className="slider-container">
-        <div className="slider-list">
-          <ItemSlider data={moviesPopular} index={0} />
-          <ItemSlider data={seriesPopular} index={0} />
-          <ItemSlider data={moviesPopular} index={1} />
-          <ItemSlider data={seriesPopular} index={1} /> 
-        </div>
-      </div>
-      <Carrusel posters={topRatedMovie} type={"PELICULAS"} url={"movies"} />
-      <Carrusel posters={topRatedSerie} type={"SERIES"} url={"series"} />
+      {moviesPopular.length && topRatedMovie.length ? (
+        <>
+          <div className="slider-container">
+            <div className="slider-list">
+              <ItemSlider data={moviesPopular} index={0} />
+              <ItemSlider data={seriesPopular} index={0} />
+              <ItemSlider data={moviesPopular} index={1} />
+              <ItemSlider data={seriesPopular} index={1} />
+            </div>
+          </div>
+          <Carrusel posters={topRatedMovie} type={"PELICULAS"} url={"movies"} />
+          <Carrusel posters={topRatedSerie} type={"SERIES"} url={"series"} />
+        </>
+      ) : (
+        <Loading />
+      )}
     </>
   );
 }
