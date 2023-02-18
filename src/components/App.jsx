@@ -7,6 +7,8 @@ import Login from "./Login";
 import Register from "./Register";
 import Description from "./Description";
 import NotFound from "./NotFound";
+import Profile from "./Profile";
+import Favorites from "./Favorites";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path=":type/:id" element={<Description />}></Route>
         <Route path="login" element={<Login />}></Route>
         <Route path="register" element={<Register />}></Route>
+        <Route path="favorites" element={<Favorites />}></Route>
+        <Route path="profile" element={<Profile />}></Route>
         <Route path="*" element={<NotFound/>}></Route>
       </Routes>
     </>

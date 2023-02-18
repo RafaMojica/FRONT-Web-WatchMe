@@ -43,6 +43,8 @@ export const persistenceUser = createAsyncThunk("PERSISTENCE_USER", async () => 
 export const logoutUser = createAsyncThunk("LOGOUT_USER", async (name) => {
   try {
     await urlBaseUsers.get("/logout");
+    alertSuccess(`Cierre de Sesión Exitosa`)
+    return {}
   } catch (error) {
     return error;
   }
@@ -97,6 +99,7 @@ const usersReducer = createReducer(initialState, {
   },
   [logoutUser.fulfilled]: (state, action) => {
     state.loading = false;
+    state.user = action.payload
   },
   [logoutUser.rejected]: (state) => {
     state.loading = false;
