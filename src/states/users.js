@@ -23,7 +23,7 @@ export const registerUser = createAsyncThunk("REGISTER_USER", async (user) => {
 
 export const loginUser = createAsyncThunk("LOGIN_USER", async (user) => {
   try {
-    const dataUser = await urlBaseUsers.post("/login", user);
+    const dataUser = await urlBaseUsers.post("/login", user, {withCredentials: true});
     alertSuccess(`Bienvenido ${dataUser.data.name}`)
     return dataUser.data;
   } catch (error) {
@@ -33,16 +33,16 @@ export const loginUser = createAsyncThunk("LOGIN_USER", async (user) => {
 
 export const persistenceUser = createAsyncThunk("PERSISTENCE_USER", async () => {
   try {
-    const user = await urlBaseUsers.get("/me");
+    const user = await urlBaseUsers.get("/me", {withCredentials: true});
     return user.data;
   } catch (error) {
     return error;
   }
 });
 
-export const logoutUser = createAsyncThunk("LOGOUT_USER", async (name) => {
+export const logoutUser = createAsyncThunk("LOGOUT_USER", async () => {
   try {
-    await urlBaseUsers.get("/logout");
+    await urlBaseUsers.get("/logout", {withCredentials: true});
     alertSuccess(`Cierre de Sesión Exitosa`)
     return {}
   } catch (error) {

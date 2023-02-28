@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router";
 import Home from "./Home";
 import Movies from "./Movies";
@@ -9,8 +9,16 @@ import Description from "./Description";
 import NotFound from "./NotFound";
 import Profile from "./Profile";
 import Favorites from "./Favorites";
+import { useDispatch } from "react-redux";
+import { persistenceUser } from "../states/users";
 
 function App() {
+  const dispatch = useDispatch()
+
+  useEffect(()=>{
+    dispatch(persistenceUser())
+  },[dispatch])
+
   return (
     <>
       <Routes>
