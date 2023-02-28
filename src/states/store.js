@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import usersFavorites from "./favorites";
+import favoritesReducer from "./favorites";
 import movieReducer from "./movies";
 import serieReducer from "./series";
 import usersReducer from "./users";
@@ -9,7 +9,7 @@ const store = configureStore({
         movies: movieReducer,
         series: serieReducer,
         users: usersReducer,
-        favorites: usersFavorites,
+        favorites: favoritesReducer,
     },
 })
 
