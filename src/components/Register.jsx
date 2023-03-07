@@ -5,10 +5,17 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../states/users';
 import validation from "../validations/forms"
+import { useNavigate } from 'react-router';
 
 function Register() {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { register, handleSubmit, formState: {errors} } = useForm();
+
+  const dataRegister = (data) => {
+    dispatch(registerUser(data))
+    navigate("/login")
+  }
 
   return (
     <>
@@ -16,7 +23,7 @@ function Register() {
     <div className="register-container">
       <div className="register-box">
         <h2>Crea tu cuenta en Watch Me</h2>
-        <form autoComplete="off" onSubmit={handleSubmit((data)=> dispatch(registerUser(data)))}>
+        <form autoComplete="off" onSubmit={handleSubmit(dataRegister)}>
           <div className="field-register">
             <input type="text" id="name" name='name' required {...register("name", validation.name)}/>
             <label htmlFor="nombre">Nombre</label>

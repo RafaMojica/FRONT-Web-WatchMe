@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import show from "../utils/showPassword";
 import Navbar from "./Navbar";
 import { useForm } from "react-hook-form";
@@ -8,8 +8,14 @@ import { loginUser } from "../states/users";
 import validation from "../validations/forms"
 
 function Login() {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const { register, handleSubmit, formState: {errors} } = useForm();
+
+  const dataLogin = (data) => {
+    dispatch(loginUser(data))
+    navigate("/")
+  }
 
   return (
     <>
@@ -18,7 +24,7 @@ function Login() {
       <div className="login-box">
         <h2>Bienvenido de vuelta</h2>
         <p>Inicia sesión</p>
-        <form autoComplete="off" onSubmit={handleSubmit((data)=> dispatch(loginUser(data)))}>
+        <form autoComplete="off" onSubmit={handleSubmit(dataLogin)}>
           <div className="field-login">
             <input type="text" id="email" required {...register("email", validation.email)}/>
             <label htmlFor="email">Correo electrónico</label>
