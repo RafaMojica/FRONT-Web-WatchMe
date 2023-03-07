@@ -11,6 +11,7 @@ function Series() {
   const dispatch = useDispatch();
   const seriesPopular = useSelector((state) => state.series.popular);
   const genresSeries = useSelector((state) => state.series.genre);
+  const user = useSelector((state) => state.users.user);
 
   useEffect(() => {
     dispatch(genreSeries());
@@ -32,7 +33,7 @@ function Series() {
             </div>
             <div className="cards-container">
               {seriesPopular.map((serie) => (
-                <Cards key={serie.id} movie={serie} />
+                <Cards key={serie.id} movie={serie} user={user} />
               ))}
             </div>
             <div className="btn-container">
