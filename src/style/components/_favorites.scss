@@ -1,0 +1,26 @@
+.word-container{
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.favorite-container{
+    margin: auto;
+    padding: 0 4%;
+    h3 {
+        font-size: 1.5rem;
+        margin: 40px 0;
+    }
+}
+
+.favorite-Card{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+    img{
+        margin: 15px 0;
+    }
+}

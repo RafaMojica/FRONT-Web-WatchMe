@@ -1,5 +1,6 @@
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import axios from "axios";
+import swal from "sweetalert"
 
 const initialState = {
   loading: true,
@@ -7,21 +8,24 @@ const initialState = {
 };
 
 const urlBaseFavorites = axios.create({ baseURL: `${process.env.REACT_APP_URL_FAVORITES}` });
+const alertError = (error) => swal({ title: error.response.data, text: " ", icon: "error", timer: "2500", button: false })
+const alertSuccess = (title) => swal({ title: title, text: " ", icon: "success", timer: "2500", button: false })
 
 export const addFavorite = createAsyncThunk("ADD_FAVORITE", async (favorite) => {
   try {
-    await urlBaseFavorites.post("/add", favorite);
+    const add = await urlBaseFavorites.post("/add", {movie: favorite.movie, email: `${favorite.user.email}`} );
+    alertSuccess(add.data)
   } catch (error) {
-    return error;
+    alertError(error)
   }
 });
 
-export const seeFavorites = createAsyncThunk("SEE_FAVORITE", async (email) => {
+export const seeFavorites = createAsyncThunk("SEE_FAVORITE", async (user) => {
   try {
-    const favorites = await urlBaseFavorites.post("/see", email);
+    const favorites = await urlBaseFavorites.post("/see", {email: `${user.email}`});
     return favorites.data;
   } catch (error) {
-    return error;
+    alertError(error)
   }
 });
 
@@ -33,7 +37,7 @@ export const deleteFavorites = createAsyncThunk("DELETE_FAVORITE", async (id) =>
   }
 });
 
-const usersFavorites = createReducer(initialState, {
+const favoritesReducer = createReducer(initialState, {
   [addFavorite.pending]: (state) => {
     state.loading = true;
   },
@@ -68,4 +72,4 @@ const usersFavorites = createReducer(initialState, {
   },
 });
 
-export default usersFavorites;
+export default favoritesReducer;
