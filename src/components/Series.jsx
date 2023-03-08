@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Cards from "../common/Cards";
 import Genres from "../common/Genres";
@@ -11,12 +11,17 @@ function Series() {
   const dispatch = useDispatch();
   const seriesPopular = useSelector((state) => state.series.popular);
   const genresSeries = useSelector((state) => state.series.genre);
-  const user = useSelector((state) => state.users.user);
+  const [page, setPage] = useState(1)
+
+  const contadorPage = (value, number) => {
+    if (value === "siguiente" && number !== 1000) setPage(page + 1);
+    if (value === "atras" && number !== 1) setPage(page - 1);
+  };
 
   useEffect(() => {
     dispatch(genreSeries());
-    dispatch(popularSeries());
-  }, [dispatch]);
+    dispatch(popularSeries(page));
+  }, [dispatch, page]);
 
   return (
     <>
@@ -33,12 +38,12 @@ function Series() {
             </div>
             <div className="cards-container">
               {seriesPopular.map((serie) => (
-                <Cards key={serie.id} movie={serie} user={user} />
+                <Cards key={serie.id} movie={serie} button={"add"} />
               ))}
             </div>
             <div className="btn-container">
-              <button className="btn-genre">Atras</button>
-              <button className="btn-genre">Siguiente</button>
+              <button className="btn-genre" onClick={() => contadorPage("atras", page)}>Atras</button>
+              <button className="btn-genre" onClick={() => contadorPage("siguiente", page)}>Siguiente</button>
             </div>
           </div>
         </>

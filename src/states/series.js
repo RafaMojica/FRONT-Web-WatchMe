@@ -12,9 +12,9 @@ const initialState = {
 
 const urlBaseSeries = axios.create({ baseURL: `${process.env.REACT_APP_URL_SERIES}` });
 
-export const popularSeries = createAsyncThunk("POPULAR_SERIES", async () => {
+export const popularSeries = createAsyncThunk("POPULAR_SERIES", async (page) => {
   try {
-    const series = await urlBaseSeries.get("/popular");
+    const series = await urlBaseSeries.get(`/popular/${page}`);
     return series.data.results;
   } catch (error) {
     return error;

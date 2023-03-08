@@ -12,9 +12,9 @@ const initialState = {
 
 const urlBaseMovies = axios.create({ baseURL: `${process.env.REACT_APP_URL_MOVIE}` });
 
-export const popularMovies = createAsyncThunk("POPULAR_MOVIES", async () => {
+export const popularMovies = createAsyncThunk("POPULAR_MOVIES", async (page) => {
   try {
-    const movies = await urlBaseMovies.get("/popular");
+    const movies = await urlBaseMovies.get(`/popular/${page}`);
     return movies.data.results;
   } catch (error) {
     return error;
