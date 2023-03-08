@@ -11,25 +11,25 @@ function Favorites() {
 
   useEffect(()=>{
     dispatch(seeFavorites(user))
-  },[dispatch, user])
+  },[dispatch])
 
   return (
     <>
       <Navbar />
-      {favorites.length ? (
+      {favorites?.length ? (
         <>
           <div className="favorite-container">
-            <h3>TUS FAVORITES</h3>
+            <h3>FAVORITOS</h3>
             <div className="favorite-Card">
               {favorites.map((favorite) => (
-                <Cards key={favorite.id} movie={favorite} />
+                <Cards key={favorite.id} movie={favorite} button={"delete"} />
               ))}
             </div>
           </div>
         </>
       ) : (
         <div className="word-container">
-          <h3>GUARRDA TUS PELICULAS Y SERIES DE TV EN FAVORITOS</h3>
+          <h3>GUARDA TUS PELICULAS Y SERIES DE TV EN FAVORITOS</h3>
         </div>
       )}
     </>
