@@ -1,11 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import {AiFillHeart} from "react-icons/ai"
-import { useDispatch } from "react-redux";
-import { addFavorite } from "../states/favorites";
+import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, deleteFavorites } from "../states/favorites";
 
-function Cards({ movie, user }) {
+function Cards({ movie, button }) {
   const dispatch = useDispatch()
+  const user = useSelector((state) => state.users.user);
+
+  const buttonFavorite = () => {
+    if (button === "add") dispatch(addFavorite({movie, user}))
+    if(button === "delete") dispatch(deleteFavorites(movie.id))
+  }
 
   return (
     <div className="card">
@@ -14,7 +20,7 @@ function Cards({ movie, user }) {
           <div className="description-card">
             <h5>{movie.title || movie.name}</h5>
             <Link to={`${movie?.id}`}><button>Ver Detalles</button></Link>
-            <button className="favorite-card" onClick={()=> dispatch(addFavorite({movie, user}))}><AiFillHeart /></button>
+            <button className="favorite-card" onClick={buttonFavorite}><AiFillHeart /></button>
           </div>
       </div>
     </div>
