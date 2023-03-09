@@ -11,6 +11,7 @@ function Series() {
   const dispatch = useDispatch();
   const seriesPopular = useSelector((state) => state.series.popular);
   const genresSeries = useSelector((state) => state.series.genre);
+  const seriesSearch = useSelector((state) => state.series.search);
   const [page, setPage] = useState(1)
 
   const contadorPage = (value, number) => {
@@ -36,11 +37,19 @@ function Series() {
                 <Genres key={genre.id} genre={genre} />
               ))}
             </div>
-            <div className="cards-container">
-              {seriesPopular.map((serie) => (
-                <Cards key={serie.id} movie={serie} button={"add"} />
-              ))}
+            {seriesSearch.length ? (
+              <div className="cards-container">
+                {seriesSearch.map((serie) => (
+                  <Cards key={serie.id} movie={serie} button={"add"} />
+                ))}
+              </div>
+            ) : (
+              <div className="cards-container">
+                {seriesPopular.map((serie) => (
+                  <Cards key={serie.id} movie={serie} button={"add"} />
+                ))}
             </div>
+            )}
             <div className="btn-container">
               <button className="btn-genre" onClick={() => contadorPage("atras", page)}>Atras</button>
               <button className="btn-genre" onClick={() => contadorPage("siguiente", page)}>Siguiente</button>
