@@ -1,6 +1,6 @@
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import axios from "axios";
-import swal from "sweetalert"
+import { alertError, alertSuccess } from "../utils/alerts";
 
 const initialState = {
   loading: true,
@@ -8,26 +8,22 @@ const initialState = {
 };
 
 const urlBaseUsers = axios.create({ baseURL: `${process.env.REACT_APP_URL_USERS}` });
-const alertError = (error) => swal({ title: error.response.data, text: " ", icon: "error", timer: "2500", button: false })
-const alertSuccess = (title) => swal({ title: title, text: " ", icon: "success", timer: "2500", button: false })
-
 
 export const registerUser = createAsyncThunk("REGISTER_USER", async (user) => {
   try {
     const registro = await urlBaseUsers.post("/register", user);
-    alertSuccess(registro.data)
+    return registro.data;
   } catch (error) {
-    alertError(error)
+    throw new Error (error.response.data)
   }
 });
 
 export const loginUser = createAsyncThunk("LOGIN_USER", async (user) => {
   try {
     const dataUser = await urlBaseUsers.post("/login", user, {withCredentials: true});
-    alertSuccess(`Bienvenido ${dataUser.data.name}`)
     return dataUser.data;
   } catch (error) {
-    alertError(error)
+    throw new Error (error.response.data)
   }
 });
 
@@ -36,17 +32,16 @@ export const persistenceUser = createAsyncThunk("PERSISTENCE_USER", async () => 
     const user = await urlBaseUsers.get("/me", {withCredentials: true});
     return user.data;
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 
 export const logoutUser = createAsyncThunk("LOGOUT_USER", async () => {
   try {
     await urlBaseUsers.get("/logout", {withCredentials: true});
-    alertSuccess(`Cierre de Sesión Exitosa`)
     return {}
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 
@@ -54,7 +49,7 @@ export const deleteUser = createAsyncThunk("DELETE_USER", async (email) => {
   try {
     urlBaseUsers.delete(`/delete/${email}`);
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 
@@ -64,9 +59,11 @@ const usersReducer = createReducer(initialState, {
   },
   [registerUser.fulfilled]: (state, action) => {
     state.loading = false;
+    alertSuccess(action.payload)
   },
   [registerUser.rejected]: (state, action) => {
     state.loading = false;
+    alertError(action.error.message)
   },
 
 
@@ -76,9 +73,11 @@ const usersReducer = createReducer(initialState, {
   [loginUser.fulfilled]: (state, action) => {
     state.loading = false;
     state.user = action.payload;
+    alertSuccess(`Bienvenido ${action.payload.name}`)
   },
-  [loginUser.rejected]: (state) => {
+  [loginUser.rejected]: (state, action) => {
     state.loading = false;
+    alertError(action.error.message)
   },
 
 
@@ -100,6 +99,7 @@ const usersReducer = createReducer(initialState, {
   [logoutUser.fulfilled]: (state, action) => {
     state.loading = false;
     state.user = action.payload
+    alertSuccess(`Cierre de Sesión Exitosa`)
   },
   [logoutUser.rejected]: (state) => {
     state.loading = false;

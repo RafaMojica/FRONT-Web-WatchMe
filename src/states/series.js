@@ -17,7 +17,7 @@ export const popularSeries = createAsyncThunk("POPULAR_SERIES", async (page) => 
     const series = await urlBaseSeries.get(`/popular/${page}`);
     return series.data.results;
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 
@@ -26,7 +26,7 @@ export const selectSerie = createAsyncThunk("SELECT_SERIE", async (id) => {
     const serie = await urlBaseSeries.get(`/select/${id}`);
     return serie.data;
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 
@@ -37,7 +37,7 @@ export const searchSeries = createAsyncThunk("SEARCH_SERIES", async (name) => {
     const series = await urlBaseSeries.get(`/search/${name}`);
     return series.data.results;
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 
@@ -46,7 +46,7 @@ export const genreSeries = createAsyncThunk("GENRE_SERIES", async () => {
     const genre = await urlBaseSeries.get("/genre");
     return genre.data.genres;
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 
@@ -55,7 +55,7 @@ export const topSeries = createAsyncThunk("TOP_SERIES", async () => {
     const top = await urlBaseSeries.get("/topRated");
     return top.data.results;
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 

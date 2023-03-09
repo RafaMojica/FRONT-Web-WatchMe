@@ -28,7 +28,7 @@ function Series() {
       <Navbar />
       {genresSeries.length && seriesPopular.length ? (
         <>
-          <div className="serie-container">
+          <div>
             <SearchBar type={"serie"} />
             <div className="conteiner-genres">
               <button className="btn-genre">All</button>

@@ -17,7 +17,7 @@ export const popularMovies = createAsyncThunk("POPULAR_MOVIES", async (page) => 
     const movies = await urlBaseMovies.get(`/popular/${page}`);
     return movies.data.results;
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 
@@ -26,7 +26,7 @@ export const selectMovie = createAsyncThunk("SELECT_MOVIE", async (id) => {
     const movie = await urlBaseMovies.get(`/select/${id}`);
     return movie.data;
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 
@@ -37,7 +37,7 @@ export const searchMovies = createAsyncThunk("SEARCH_MOVIES", async (name) => {
     const movies = await urlBaseMovies.get(`/search/${name}`);
     return movies.data.results;
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 
@@ -46,7 +46,7 @@ export const genreMovies = createAsyncThunk("GENRE_MOVIES", async () => {
     const genre = await urlBaseMovies.get("/genre");
     return genre.data.genres;
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 
@@ -55,7 +55,7 @@ export const topMovies = createAsyncThunk("TOP_MOVIES", async () => {
     const top = await urlBaseMovies.get("/topRated");
     return top.data.results;
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 

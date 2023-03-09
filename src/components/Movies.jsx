@@ -28,7 +28,7 @@ function Movies() {
       <Navbar />
       {genresMovies.length && moviesPopular.length ? (
         <>
-          <div className="movie-container">
+          <div>
             <SearchBar type={"película"} />
             <div className="conteiner-genres">
               <button className="btn-genre">All</button>

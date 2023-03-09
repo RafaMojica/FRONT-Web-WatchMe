@@ -1,6 +1,6 @@
 import { createAsyncThunk, createReducer } from "@reduxjs/toolkit";
 import axios from "axios";
-import swal from "sweetalert"
+import { alertError, alertSuccess } from "../utils/alerts";
 
 const initialState = {
   loading: true,
@@ -8,15 +8,13 @@ const initialState = {
 };
 
 const urlBaseFavorites = axios.create({ baseURL: `${process.env.REACT_APP_URL_FAVORITES}` });
-const alertError = (error) => swal({ title: error.response.data, text: " ", icon: "error", timer: "2500", button: false })
-const alertSuccess = (title) => swal({ title: title, text: " ", icon: "success", timer: "2500", button: false })
 
 export const addFavorite = createAsyncThunk("ADD_FAVORITE", async (favorite) => {
   try {
     const add = await urlBaseFavorites.post("/add", {movie: favorite.movie, email: `${favorite.user.email}`} );
-    alertSuccess(add.data)
+    return add.data
   } catch (error) {
-    alertError(error)
+    throw new Error (error.response.data)
   }
 });
 
@@ -25,7 +23,7 @@ export const seeFavorites = createAsyncThunk("SEE_FAVORITE", async (user) => {
     const favorites = await urlBaseFavorites.post("/see", {email: `${user.email}`});
     return favorites.data;
   } catch (error) {
-    alertError(error)
+    throw new Error (error.response.data)
   }
 });
 
@@ -33,7 +31,7 @@ export const deleteFavorites = createAsyncThunk("DELETE_FAVORITE", async (id) =>
   try {
     await urlBaseFavorites.delete(`/delete/${id}`);
   } catch (error) {
-    return error;
+    throw new Error (error.response.data)
   }
 });
 
@@ -43,9 +41,11 @@ const favoritesReducer = createReducer(initialState, {
   },
   [addFavorite.fulfilled]: (state, action) => {
     state.loading = false;
+    alertSuccess(action.payload)
   },
-  [addFavorite.rejected]: (state) => {
+  [addFavorite.rejected]: (state, action) => {
     state.loading = false;
+    alertError(action.error.message)
   },
 
 
@@ -56,8 +56,9 @@ const favoritesReducer = createReducer(initialState, {
     state.loading = false;
     state.favorites = action.payload;
   },
-  [seeFavorites.rejected]: (state) => {
+  [seeFavorites.rejected]: (state, action) => {
     state.loading = false;
+    alertError(action.error.message)
   },
 
 
