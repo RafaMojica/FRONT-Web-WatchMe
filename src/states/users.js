@@ -47,7 +47,8 @@ export const logoutUser = createAsyncThunk("LOGOUT_USER", async () => {
 
 export const deleteUser = createAsyncThunk("DELETE_USER", async (email) => {
   try {
-    urlBaseUsers.delete(`/delete/${email}`);
+    const deleteUser = await urlBaseUsers.delete(`/delete/${email}`);
+    return deleteUser.data
   } catch (error) {
     throw new Error (error.response.data)
   }
@@ -111,9 +112,11 @@ const usersReducer = createReducer(initialState, {
   },
   [deleteUser.fulfilled]: (state, action) => {
     state.loading = false;
+    alertSuccess(action.payload)
   },
-  [deleteUser.rejected]: (state) => {
+  [deleteUser.rejected]: (state, action) => {
     state.loading = false;
+    alertError(action.error.message)
   },
 });
 

@@ -1,11 +1,21 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Navbar from "./Navbar";
 import {CgUserlane} from "react-icons/cg";
+import { deleteUser, logoutUser } from "../states/users";
+import { useNavigate } from "react-router";
 
 function Perfil() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const user = useSelector((state) => state.users.user);
   
+  const deleteButton = () => {
+    dispatch(logoutUser())
+    dispatch(deleteUser(user.email))
+    navigate("/")
+  }
+
   return (
     <div>
       <Navbar />
@@ -18,7 +28,7 @@ function Perfil() {
           <h4>{`${user.name} ${user.lastname}`}</h4>
           <h3>Correo</h3>
           <h4>{user.email}</h4>
-          <button>Eliminar perfil</button>
+          <button onClick={deleteButton}>Eliminar perfil</button>
         </div>
       </div>
     </div>
