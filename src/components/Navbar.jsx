@@ -2,7 +2,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { IoHeartCircleOutline } from "react-icons/io5";
-import { BsCircleFill } from "react-icons/bs";
+import { FaUserCircle } from "react-icons/fa";
 import appearMenu from "../utils/navbar";
 import Logo from "../assets/logoWatchMe.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -31,7 +31,7 @@ function Navbar() {
         <>
           <div className="navbar-login">
             <NavLink to="/favorites"><IoHeartCircleOutline className="scale favorite" /></NavLink>
-            <NavLink to="/profile"><div className="scale profile"><BsCircleFill className="" /><span>{user?.name.slice(0,1)}</span></div></NavLink>
+            <NavLink to="/profile"><div className="scale profile"><FaUserCircle /></div></NavLink>
             <Link to="/" onClick={()=> dispatch(logoutUser())}>Cerrar Sesion</Link>
             <AiOutlineMenu className="icon appear" id="icon-menu" onClick={appearMenu} />
             <AiOutlineClose className="icon" id="icon-close" onClick={appearMenu} />

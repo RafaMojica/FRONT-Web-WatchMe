@@ -82,18 +82,7 @@
     color: red;
   }
   .profile{
-    position: relative;
-    svg{
-      z-index: 2;
-    }
-    span{
-      z-index: 3;
-      position: absolute;
-      right: 25%;
-      top: 10%;
-      color: black;
-      font-size: 1.5rem;
-    }
+    color: $hover;
   }
 }
 
