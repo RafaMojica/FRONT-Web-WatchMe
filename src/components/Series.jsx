@@ -37,19 +37,24 @@ function Series() {
                 <Genres key={genre.id} genre={genre} />
               ))}
             </div>
-            {seriesSearch.length ? (
-              <div className="cards-container">
-                {seriesSearch.map((serie) => (
-                  <Cards key={serie.id} movie={serie} button={"add"} />
-                ))}
+            <div> 
+              {seriesSearch.length ? (
+                <div className="cards-container">
+                  {seriesSearch.map((serie) => (
+                    <Cards key={serie.id} movie={serie} button={"add"} />
+                  ))}
+                </div>
+              ) : (
+                <div className="cards-container">
+                  {seriesPopular.map((serie) => (
+                    <Cards key={serie.id} movie={serie} button={"add"} />
+                  ))}
               </div>
-            ) : (
-              <div className="cards-container">
-                {seriesPopular.map((serie) => (
-                  <Cards key={serie.id} movie={serie} button={"add"} />
-                ))}
+              )}
             </div>
-            )}
+            <div className="pages-container">
+              <h3>Pagina: {page}</h3>
+            </div>
             <div className="btn-container">
               <button className="btn-genre" onClick={() => contadorPage("atras", page)}>Atras</button>
               <button className="btn-genre" onClick={() => contadorPage("siguiente", page)}>Siguiente</button>

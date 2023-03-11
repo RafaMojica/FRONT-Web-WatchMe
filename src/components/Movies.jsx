@@ -37,19 +37,24 @@ function Movies() {
                 <Genres key={genre.id} genre={genre} />
               ))}
             </div>
-            {moviesSearch.length ? (
-              <div className="cards-container">
-                {moviesSearch.map((movie) => (
-                  <Cards key={movie.id} movie={movie} button={"add"} />
-                ))}
-              </div>
-            ) : (
-              <div className="cards-container">
-                {moviesPopular.map((movie) => (
-                  <Cards key={movie.id} movie={movie} button={"add"} />
-                ))}
-              </div>
-            )}
+            <div>
+              {moviesSearch.length ? (
+                <div className="cards-container">
+                  {moviesSearch.map((movie) => (
+                    <Cards key={movie.id} movie={movie} button={"add"} />
+                  ))}
+                </div>
+              ) : (
+                <div className="cards-container">
+                  {moviesPopular.map((movie) => (
+                    <Cards key={movie.id} movie={movie} button={"add"} />
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="pages-container">
+              <h3>Pagina: {page}</h3>
+            </div>
             <div className="btn-container">
               <button className="btn-genre" onClick={() => contadorPage("atras", page)}>Atras</button>
               <button className="btn-genre" onClick={() => contadorPage("siguiente", page)}>Siguiente</button>
