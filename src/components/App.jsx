@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Route, Routes } from "react-router";
+import React, { useEffect, useLayoutEffect } from "react";
+import { Route, Routes, useLocation } from "react-router";
 import Home from "./Home";
 import Movies from "./Movies";
 import Series from "./Series";
@@ -13,14 +13,23 @@ import { useDispatch } from "react-redux";
 import { persistenceUser } from "../states/users";
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
-    dispatch(persistenceUser())
-  },[dispatch])
+  useEffect(() => {
+    dispatch(persistenceUser());
+  }, [dispatch]);
+
+  const UpScroll = ({ children }) => {
+    const location = useLocation();
+    useLayoutEffect(() => {
+      document.documentElement.scrollTo(0, 0);
+    }, [location.pathname]);
+    return children;
+  };
 
   return (
     <>
+    <UpScroll>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="movies" element={<Movies />}></Route>
@@ -30,8 +39,9 @@ function App() {
         <Route path="register" element={<Register />}></Route>
         <Route path="favorites" element={<Favorites />}></Route>
         <Route path="profile" element={<Profile />}></Route>
-        <Route path="*" element={<NotFound/>}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
+    </UpScroll>
     </>
   );
 }
